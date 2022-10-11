@@ -1,13 +1,25 @@
 import "./scss/app.scss";
+import {React, useState, useEffect} from "react";
 import Header from "./components/Header.jsx";
 import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import Pizza_block from "./components/Pizza_block";
 
-import items from "./pizza.json";
-
 function App() {
-  return (
+   const [items, setItems] = useState([]);
+
+   useEffect(() => {
+      fetch('https://634014c0e44b83bc73c878f9.mockapi.io/items')
+          .then((res) => {
+             return res.json();
+          })
+          .then((arr) => {
+             setItems(arr);
+          })
+   }, []);
+
+
+   return (
     <div className="wrapper">
       <Header />
       <div className="content">
