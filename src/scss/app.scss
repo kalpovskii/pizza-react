@@ -49,7 +49,7 @@ body {
     align-items: center;
     justify-content: space-between;
     
-    @media (max-width: 1290px){
+    @media (max-width: 1360px){
       flex-direction: column-reverse;
       row-gap: 30px;
     }
