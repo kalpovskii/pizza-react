@@ -1,29 +1,49 @@
 import { React, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem } from "../../redux/slices/cartSlice";
 
-function PizzaBlock(props) {
+const typeNames = ["тонкое", "традиционное"];
+
+function PizzaBlock({ id, title, price, imageUrl, sizes, types, rating }) {
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) =>
+    state.cart.items.find((obj) => obj.id === id)
+  );
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 
-  const typesName = ["тонкое", "традиционное"];
+  const addedCount = cartItem ? cartItem.count : 0;
+
+  const onClickAdd = () => {
+    const item = {
+      id,
+      title,
+      price,
+      imageUrl,
+      type: typeNames[activeType],
+      size: sizes[activeSize],
+    };
+    dispatch(addItem(item));
+  };
 
   return (
     <div className="pizza-block">
-      <img className="pizza-block__image" src={props.imageUrl} alt="Pizza" />
-      <h4 className="pizza-block__title">{props.title}</h4>
+      <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+      <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {props.types.map((typeIndex) => (
+          {types.map((typeIndex) => (
             <li
               key={typeIndex}
               onClick={() => setActiveType(typeIndex)}
               className={activeType === typeIndex ? "active" : ""}
             >
-              {typesName[typeIndex]}
+              {typeNames[typeIndex]}
             </li>
           ))}
         </ul>
         <ul>
-          {props.sizes.map((size, index) => (
+          {sizes.map((size, index) => (
             <li
               key={size}
               onClick={() => setActiveSize(index)}
@@ -35,8 +55,11 @@ function PizzaBlock(props) {
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от {props.price} ₽</div>
-        <button className="button button--outline button--add">
+        <div className="pizza-block__price">от {price} ₽</div>
+        <button
+          onClick={onClickAdd}
+          className="button button--outline button--add"
+        >
           <svg
             width="12"
             height="12"
@@ -50,7 +73,7 @@ function PizzaBlock(props) {
             />
           </svg>
           <span>Добавить</span>
-          <i>0</i>
+          {addedCount > 0 && <i>{addedCount}</i>}
         </button>
       </div>
     </div>
