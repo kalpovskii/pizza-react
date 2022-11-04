@@ -12,7 +12,7 @@ https://kalpovskii.github.io/pizza-react/
 * Redux Toolkit (хранение данных / пицц)
 * React Router v6 (навигация)
 * Axios + Fetch (отправка запроса на бэкенд)
-* MockAPI
+* MockAPI (для имитации работы бэкенда)
 * React Hooks (хуки)
 * Prettier (форматирование кода)
 * CSS-Modules / SCSS (стилизация)
