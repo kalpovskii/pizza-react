@@ -6,7 +6,7 @@ https://kalpovskii.github.io/pizza-react/
 * Склонируйте репозиторий
 * `docker build . -t pizza/react`
 * `docker run -p 3000:3000 -d pizza/react`
-* Перейдите на `localhost:3000`
+* Перейдите на [localhost:3000](https://localhost:3000)
 ### Технологии
 * ReactJS 18
 * Redux Toolkit (хранение данных / пицц)
